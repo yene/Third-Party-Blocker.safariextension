@@ -1,0 +1,21 @@
+[
+    {
+        "action": {
+            "type": "block"
+        },
+        "trigger": {
+            "url-filter": ".*",
+            "resource-type": ["script"],
+            "load-type": ["third-party"]
+        }
+    },
+    {
+        "action": {
+            "type": "ignore-previous-rules"
+        },
+        "trigger": {
+            "url-filter": ".*",
+            "if-domain": ["www.twitch.tv", "www.youtube.com", "www.reddit.com"]
+        }
+    }
+]

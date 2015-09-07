@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Yannick Weiss</string>
+	<key>Builder Version</key>
+	<string>11601.1.56</string>
+	<key>CFBundleDisplayName</key>
+	<string>Third Party Blocker</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yannickweiss.thirdpartyblocker</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>Global.html</string>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>ignorePage</string>
+				<key>Identifier</key>
+				<string>ignorePage</string>
+				<key>Image</key>
+				<string>Icon.png</string>
+				<key>Include By Default</key>
+				<true/>
+				<key>Label</key>
+				<string>Ignore Page</string>
+				<key>Tool Tip</key>
+				<string>Ignore Third Party Scripts on this Page</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Description</key>
+	<string>Blocks all third party scripts.</string>
+	<key>DeveloperIdentifier</key>
+	<string>NDJHDNKXD6</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>http://yannickweiss.com</string>
+</dict>
+</plist>

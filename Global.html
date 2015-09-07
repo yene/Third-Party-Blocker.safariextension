@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>global HTML page</title>
+<script type="text/javascript">
+// have two different icons
+// https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/AddingButtonstotheMainSafariToolbar/AddingButtonstotheMainSafariToolbar.html
+
+// default exceptions: www.twitch.tv, www.youtube.com, www.reddit.com
+
+  updateContentBlocker();
+
+  function updateContentBlocker() {
+    var domains = safari.extension.settings.getItem("URLException");
+    var exceptions = "";
+    if (domains != null) {
+      exceptions = domains.split(",");
+    }
+    var rule = [{
+          "action": {
+              "type": "block"
+          },
+          "trigger": {
+              "url-filter": ".*",
+              "resource-type": ["script"],
+              "load-type": ["third-party"]
+          }
+      },
+      {
+          "action": {
+              "type": "ignore-previous-rules"
+          },
+          "trigger": {
+              "url-filter": ".*",
+              "if-domain": exceptions
+          }
+      }
+    ];
+    safari.extension.setContentBlocker(rule);
+  }
+
+  safari.application.addEventListener("command", handleCommand, false);
+
+  function handleCommand(e) {
+    if (e.command == "ignorePage") {
+      // add current page to ignore list
+      var domain = extractDomain(safari.application.activeBrowserWindow.activeTab.url);
+      var domains = safari.extension.settings.getItem("URLException");
+      if (domains == null || domains.length == 0) {
+        safari.extension.settings.URLException = domain;
+      } else {
+        var arr = domains.split(",");
+        arr = arr.map(function(str) {
+          return str.trim();
+        });
+        if (arr.indexOf(domain) != -1) {
+          // remove it
+          arr.splice(arr.indexOf(domain), 1);
+        } else {
+          // add it
+          arr.push(domain);
+        }
+        safari.extension.settings.URLException = arr.join(",");
+      }
+      updateContentBlocker();
+    }
+  }
+
+
+  function extractDomain(url) {
+    var domain;
+    //find & remove protocol (http, ftp, etc.) and get domain
+    if (url.indexOf("://") > -1) {
+        domain = url.split('/')[2];
+    }
+    else {
+        domain = url.split('/')[0];
+    }
+
+    //find & remove port number
+    domain = domain.split(':')[0];
+
+    return domain;
+  }
+
+</script>
+</head>
+<body>
+</body>
+</html>
