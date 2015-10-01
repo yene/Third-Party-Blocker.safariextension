@@ -41,6 +41,22 @@
 
   safari.application.addEventListener("command", handleCommand, false);
 
+
+  function isException() {
+      var domain = extractDomain(safari.application.activeBrowserWindow.activeTab.url);
+      var domains = safari.extension.settings.getItem("URLException");
+      if (domains == null || domains.length == 0) {
+        return false;
+      } else {
+        var arr = domains.split(",");
+        arr = arr.map(function(str) {
+          return str.trim();
+        });
+        return (arr.indexOf(domain) != -1)
+      }
+  }
+
+
   function handleCommand(e) {
     if (e.command == "ignorePage") {
       // add current page to ignore list
@@ -63,6 +79,18 @@
         safari.extension.settings.URLException = arr.join(",");
       }
       updateContentBlocker();
+      updateButton();
+    }
+  }
+
+  safari.application.addEventListener("activate", updateButton, true);
+
+  function updateButton() {
+    var item = safari.extension.toolbarItems[0];
+    if (isException()) {
+      item.image = safari.extension.baseURI + 'Icon-Off.png';
+    } else {
+      item.image = safari.extension.baseURI + 'Icon.png';
     }
   }
 
