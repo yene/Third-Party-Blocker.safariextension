@@ -49,9 +49,6 @@
         return false;
       } else {
         var arr = domains.split(",");
-        arr = arr.map(function(str) {
-          return str.trim();
-        });
         return (arr.indexOf(domain) != -1)
       }
   }
@@ -66,9 +63,6 @@
         safari.extension.settings.URLException = domain;
       } else {
         var arr = domains.split(",");
-        arr = arr.map(function(str) {
-          return str.trim();
-        });
         if (arr.indexOf(domain) != -1) {
           // remove it
           arr.splice(arr.indexOf(domain), 1);
@@ -86,7 +80,8 @@
   safari.application.addEventListener("activate", updateButton, true);
 
   function updateButton() {
-    var item = safari.extension.toolbarItems[0];
+    var items = safari.extension.toolbarItems;
+    var item = items.find(function(v) {return v.browserWindow == safari.application.activeBrowserWindow})
     if (isException()) {
       item.image = safari.extension.baseURI + 'Icon-Off.png';
     } else {
