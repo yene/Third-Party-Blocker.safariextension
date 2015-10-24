@@ -59,6 +59,7 @@
       // add current page to ignore list
       var domain = extractDomain(safari.application.activeBrowserWindow.activeTab.url);
       var domains = safari.extension.settings.getItem("URLException");
+      domains = domains.replace(",,", ","); // fix double comma problem
       if (domains == null || domains.length == 0) {
         safari.extension.settings.URLException = domain;
       } else {
@@ -74,10 +75,14 @@
       }
       updateContentBlocker();
       updateButton();
+      var activeTab = safari.application.activeBrowserWindow.activeTab;
+      activeTab.url = activeTab.url;
     }
   }
 
+  // https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/WorkingwithWindowsandTabs/WorkingwithWindowsandTabs.html
   safari.application.addEventListener("activate", updateButton, true);
+  safari.application.addEventListener("navigate", updateButton, true);
 
   function updateButton() {
     var items = safari.extension.toolbarItems;
