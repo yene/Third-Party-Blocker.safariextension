@@ -4,6 +4,9 @@ A Safari Extension that blocks all third party scripts, but lets you add excepti
 This extensions prevents all external scripts from loading, which means you only see the content of the current domain.
 This stops external ads, external fonts and external videos from loading. It might break some pages in that case you can use the toolbar button to add an exception for this page.
 
+[Download](http://extensions.yannickweiss.com/Third%20Party%20Blocker.safariextz)
+
+
 ## Filter Enabled
 ![screenshot](material/shot1.png)
 
