@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>DefaultValue</key>
-		<string>www.twitch.tv, www.youtube.com, www.reddit.com</string>
+		<string>www.twitch.tv,www.youtube.com,www.reddit.com,developer.apple.com,itunesconnect.apple.com,www.facebook.com</string>
 		<key>Key</key>
 		<string>URLException</string>
 		<key>Title</key>
