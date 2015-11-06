@@ -6,8 +6,6 @@
 // have two different icons
 // https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/AddingButtonstotheMainSafariToolbar/AddingButtonstotheMainSafariToolbar.html
 
-// default exceptions: www.twitch.tv, www.youtube.com, www.reddit.com
-
   updateContentBlocker();
 
   function updateContentBlocker() {
@@ -38,9 +36,6 @@
     ];
     safari.extension.setContentBlocker(rule);
   }
-
-  safari.application.addEventListener("command", handleCommand, false);
-
 
   function isException() {
       var domain = extractDomain(safari.application.activeBrowserWindow.activeTab.url);
@@ -80,9 +75,8 @@
     }
   }
 
-  // https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/WorkingwithWindowsandTabs/WorkingwithWindowsandTabs.html
-  safari.application.addEventListener("activate", updateButton, true);
-  safari.application.addEventListener("navigate", updateButton, true);
+  safari.application.addEventListener("validate", updateButton, false);
+  safari.application.addEventListener("command", handleCommand, false);
 
   function updateButton() {
     var items = safari.extension.toolbarItems;
